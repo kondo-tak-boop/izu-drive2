@@ -1,0 +1,202 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>熱海→土肥 ドライブ計画</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 夕暮れの駿河湾。上に4案の比較、下にタブで各案のタイムライン（時刻＝縦軸の道） */
+:root{
+  --bg:#f3f5f6; --surface:#ffffff; --fg:#1b2a33; --muted:#5d6e78; --line:#d5dde1;
+  --sea:#1f5f7a; --sea-soft:#e2eef3; --dusk:#d9772b; --dusk-soft:#fbeadb; --warn:#a2452f; --warn-soft:#f8e4de;
+  --display:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f181d; --surface:#16232a; --fg:#e6edf0; --muted:#9aabb4; --line:#2a3b44;
+  --sea:#6fb4d2; --sea-soft:#17303b; --dusk:#f0a05e; --dusk-soft:#3a2a1c; --warn:#ee8f78; --warn-soft:#3a201a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f181d; --surface:#16232a; --fg:#e6edf0; --muted:#9aabb4; --line:#2a3b44;
+  --sea:#6fb4d2; --sea-soft:#17303b; --dusk:#f0a05e; --dusk-soft:#3a2a1c; --warn:#ee8f78; --warn-soft:#3a201a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.75}
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+header{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--sea);font-weight:700}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(28px,6vw,42px);line-height:1.25;margin:0;text-wrap:balance}
+h1 .arrow{color:var(--dusk)}
+h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 14px;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin:4px 0 0;padding:0;list-style:none;font-size:13px}
+.facts li{display:flex;gap:6px}.facts b{color:var(--sea);font-weight:700}
+/* compare */
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:12px;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--bg)}
+tbody tr:last-child td{border-bottom:none}
+td.k{font-weight:700;white-space:nowrap}
+.tag{display:inline-block;font-family:var(--mono);font-size:12px;padding:1px 7px;border-radius:3px;background:var(--sea-soft);color:var(--sea);margin-right:6px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.dots{letter-spacing:2px;color:var(--dusk)}
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);padding-bottom:0;margin-bottom:20px}
+.tab{font:inherit;font-size:14px;background:none;border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;padding:8px 14px;color:var(--muted);cursor:pointer;margin-bottom:-1px}
+.tab[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--fg);font-weight:700}
+.tab:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;margin-bottom:6px}
+.panel-head h3{font-family:var(--display);font-weight:900;font-size:24px;margin:0}
+.panel p.sum{margin:0 0 18px;color:var(--muted);max-width:62ch}
+.maplink{font-size:13px;color:var(--sea);font-weight:700;text-decoration:none;border:1px solid var(--sea);border-radius:4px;padding:4px 10px;white-space:nowrap}
+.maplink:hover{background:var(--sea-soft)}
+/* timeline */
+ol.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.stop{display:grid;grid-template-columns:56px 18px minmax(0,1fr);column-gap:12px}
+.t{font-family:var(--mono);font-size:14px;color:var(--fg);text-align:right;padding-top:2px;font-variant-numeric:tabular-nums}
+.rail{position:relative;display:flex;justify-content:center}
+.rail::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.stop:first-child .rail::before{top:10px}.stop:last-child .rail::before{bottom:calc(100% - 12px)}
+.pin{position:relative;width:12px;height:12px;border-radius:50%;background:var(--surface);border:3px solid var(--sea);margin-top:7px}
+.stop.end .pin{background:var(--dusk);border-color:var(--dusk)}
+.stop.drive .pin{width:8px;height:8px;border:none;background:var(--line);margin-top:9px}
+.body{padding-bottom:18px;min-width:0}
+.body strong{font-size:16px;display:block;line-height:1.5}
+.stop.drive .body strong{font-size:14px;font-weight:500;color:var(--muted)}
+.body span{display:block;color:var(--muted);font-size:14px}
+.note{display:inline-block;margin-top:6px;font-size:12.5px;padding:2px 8px;border-radius:3px;background:var(--warn-soft);color:var(--warn)}
+.note.tip{background:var(--dusk-soft);color:var(--dusk)}
+/* notes */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;min-width:0}
+.box h4{margin:0 0 8px;font-size:15px}
+.box ul{margin:0;padding-left:1.2em;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.box.warn{border-color:var(--warn)}
+.box.warn h4{color:var(--warn)}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (prefers-reduced-motion:no-preference){.panel{animation:fade .25s ease}}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">伊豆半島 半日ドライブ</div>
+    <h1>熱海駅 <span class="arrow">→</span> 土肥ふじやホテル</h1>
+    <p class="lede">13:00〜13:30に熱海駅を出発し、17:30までに宿へ着く4つのルートです。忌中のため、神社には立ち寄らないルートにしています。</p>
+    <ul class="facts">
+      <li><b>出発</b>13:15 熱海駅</li>
+      <li><b>到着</b>17:30まで 土肥ふじやホテル</li>
+      <li><b>日の入り</b>10月上旬 17:15頃／下旬 17:00前</li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>4つのルートを比べる</h2>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>ルート</th><th>主な立ち寄り先</th><th>向いている人</th><th>山道</th><th>到着</th></tr></thead>
+        <tbody>
+          <tr><td class="k"><span class="tag">A</span>山の絶景</td><td>十国峠、伊豆スカイライン、修善寺</td><td>富士山と温泉街の両方を見たい</td><td class="dots">●●○</td><td class="num">17:15</td></tr>
+          <tr><td class="k"><span class="tag">B</span>稜線の絶景</td><td>修善寺、だるま山、西伊豆スカイライン</td><td>ドライブそのものを楽しみたい</td><td class="dots">●●●</td><td class="num">17:10</td></tr>
+          <tr><td class="k"><span class="tag">C</span>海岸線</td><td>沼津港、煌めきの丘、恋人岬</td><td>海鮮と海沿いの景色を楽しみたい</td><td class="dots">●●○</td><td class="num">17:20</td></tr>
+          <tr><td class="k"><span class="tag">D</span>歴史散策</td><td>韮山反射炉、江川邸</td><td>運転を少なめにして、歩いて見て回りたい</td><td class="dots">●○○</td><td class="num">17:10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>ルートごとの行程</h2>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div id="panels"></div>
+  </section>
+
+  <section class="grid2">
+    <div class="box warn">
+      <h4>忌中なので避けたい神社</h4>
+      <ul>
+        <li>修善寺の日枝神社（竹林の小径のすぐ近く）</li>
+        <li>熱海の来宮神社と伊豆山神社</li>
+        <li>大瀬崎の大瀬神社（ルートC：岬には入らずに通り過ぎる）</li>
+        <li>伊豆パノラマパーク山頂の葛城神社</li>
+        <li>お寺（修禅寺など）は、一般的に忌中でもお参りして問題ないとされています</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>当日の調整</h4>
+      <ul>
+        <li>霧や雨の日は、景色が見えにくいB・Cより、AかDがおすすめです</li>
+        <li>時間が押したら、旅人岬を省いて宿へ向かってください</li>
+        <li>土肥に早めに着いたら、宿の近くの土肥金山にも寄れます（最終入場は16時台）</li>
+        <li>山道ではガソリンスタンドが少ないので、修善寺までに給油しておくと安心です</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>移動時間は目安です。営業時間や定休日は最新の情報で確認していないので、出発前に各施設の公式サイトで確認してください。</footer>
+</div>
+
+<script>
+const H="土肥ふじやホテル";
+const routes=[
+ {id:"a",tag:"A",name:"山の絶景",sum:"十国峠から富士山を眺め、伊豆スカイラインで半島の背骨を南下。修善寺を散策してから峠を越えて土肥へ向かいます。",
+  way:["熱海駅","十国峠","修善寺温泉","旅人岬 伊豆市",H],
+  stops:[
+  ["13:15","熱海駅 出発","熱海峠へ山を上がる（約25分）"],
+  ["13:40","十国峠","ケーブルカーで山頂へ。富士山・駿河湾・相模湾を一望。滞在30〜40分"],
+  ["14:20","伊豆スカイライン","稜線を走って冷川ICへ。降りて修善寺へ（約50分）","drive"],
+  ["15:15","修善寺温泉街","竹林の小径、桂川沿いの散策、足湯。おやつ休憩も",null,"日枝神社は避ける"],
+  ["16:05","国道136号で土肥へ","船原峠を越える山道（約40分）","drive"],
+  ["16:50","旅人岬","駿河湾越しの夕景。晴れていれば富士山も",null,null,"夕日"],
+  ["17:15","土肥ふじやホテル 到着","岬から車で数分","end"]]},
+ {id:"b",tag:"B",name:"稜線の絶景",sum:"修善寺から高原へ上がり、だるま山で富士山を眺めます。西伊豆スカイラインの稜線を走って土肥へ下りるルートです。",
+  way:["熱海駅","修善寺温泉","だるま山高原レストハウス","土肥峠","旅人岬 伊豆市",H],
+  stops:[
+  ["13:15","熱海駅 出発","熱函道路と伊豆中央道で修善寺へ（約50分）"],
+  ["14:10","修善寺温泉街","竹林の小径と桂川沿いを散策",null,"日枝神社は避ける"],
+  ["15:00","県道18号で高原へ","修善寺から西へ上がる道（約25分）","drive"],
+  ["15:25","だるま山高原レストハウス","駿河湾越しに富士山が見える展望台。お茶休憩に"],
+  ["15:55","西伊豆スカイライン","戸田峠から土肥峠まで、ススキの稜線を走る道路。10月が見ごろ","drive"],
+  ["16:30","旅人岬","土肥峠から海へ下りて夕景を見る",null,null,"夕日"],
+  ["17:10","土肥ふじやホテル 到着","","end"]]},
+ {id:"c",tag:"C",name:"海岸線",sum:"沼津港で遅めのランチを食べ、内浦・西浦の入り江沿いを南下します。富士山の見える丘と岬をたどって土肥へ向かうルートです。",
+  way:["熱海駅","沼津港","煌めきの丘","恋人岬",H],
+  stops:[
+  ["13:15","熱海駅 出発","函南経由で沼津へ（約50分）"],
+  ["14:05","沼津港","遅めの海鮮ランチや甘味。展望水門びゅうおからの眺めも"],
+  ["14:55","県道17号で海沿いを南下","内浦・西浦の入り江沿い。細いカーブが続くので注意","drive","大瀬崎の神社は通り過ぎる"],
+  ["15:50","煌めきの丘（井田）","眼下の田んぼと駿河湾、富士山が見える展望ポイント"],
+  ["16:30","恋人岬","土肥の手前。鐘と富士山が見える遊歩道"],
+  ["17:05","旅人岬","時間がなければ省いて宿へ",null,null,"夕日"],
+  ["17:20","土肥ふじやホテル 到着","","end"]]},
+ {id:"d",tag:"D",name:"歴史散策",sum:"伊豆の国市で世界遺産の韮山反射炉と江川邸を見学します。そのあと峠を越えて土肥の海へ向かう、運転の少ないルートです。",
+  way:["熱海駅","韮山反射炉","江川邸","旅人岬 伊豆市",H],
+  stops:[
+  ["13:15","熱海駅 出発","熱函道路で伊豆の国市へ（約45分）"],
+  ["14:00","韮山反射炉","世界遺産。隣の売店で茶畑を眺めながら休憩"],
+  ["14:55","江川邸","反射炉を造った江川英龍の屋敷。重厚な土間が見どころ"],
+  ["15:40","国道136号で土肥へ","修善寺経由で船原峠を越える（約50分）","drive"],
+  ["16:35","土肥の海岸・旅人岬","夕方の海辺をゆっくり散歩",null,null,"夕日"],
+  ["17:10","土肥ふじやホテル 到着","","end"]]}
+];
+const tabs=document.getElementById("tabs"),panels=document.getElementById("panels");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+routes.forEach((r,i)=>{
+  const b=document.createElement("button");
+  b.className="tab";b.id="tab-"+r.id;b.setAttribute("role","tab");b.setAttribute("aria-controls","p-"+r.id);
+  b.textContent=r.tag+"　"+r.name;b.onclick=()=>show(r.id,true);tabs.appendChild(b);
+  const url="https://www.google.com/maps/dir/"+r.way.map(encodeURIComponent).join("/");
+  const p=document.createElement("div");p.className="panel";p.id="p-"+r.id;p.setAttribute("role","tabpanel");p.hidden=true;
+  p.innerHTML=`<div class="panel-head"><h3>${r.tag}　${esc(r.name)}</h3><a class="maplink" href="${url}" target="_blank" rel="noopener">Googleマップでルートを開く</a></div>
+  <p class="sum">${esc(r.sum)}</p><ol class="tl">${r.stops.map(([t,n,d,k,w,tip])=>`<li class="stop ${k||""}"><div class="t">${t}</div><div class="rail"><div class="pin"></div></div><div class="body"><strong>${esc(n)}</strong>${d?`<span>${esc(d)}</span>`:""}${w?`<em class="note">${esc(w)}</em>`:""}${tip?`<em class="note tip">${esc(tip)}</em>`:""}</div></li>`).join("")}</ol>`;
+  panels.appendChild(p);
+});
+function show(id,remember){
+  routes.forEach(r=>{const on=r.id===id;document.getElementById("p-"+r.id).hidden=!on;document.getElementById("tab-"+r.id).setAttribute("aria-selected",on)});
+  if(remember){try{localStorage.setItem("route",id)}catch(e){}}
+}
+let start="a";const h=location.hash.slice(1);
+if(routes.some(r=>r.id===h))start=h;else{try{const s=localStorage.getItem("route");if(routes.some(r=>r.id===s))start=s}catch(e){}}
+show(start);
+</script>
+
+</body></html>
